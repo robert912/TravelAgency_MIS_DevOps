@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mysql:
     image: mysql:8.0
@@ -30,10 +32,9 @@ services:
       - tour-network
     restart: unless-stopped
 
-  backend:
+  backend1:
     image: robert912/tourpackage-backend:latest
-    container_name: tour-backend
-    environment:
+    environment: &backend-env
       DB_HOST: mysql
       DB_PORT: 3306
       DB_NAME: dbtravel
@@ -44,20 +45,62 @@ services:
     depends_on:
       - mysql
       - keycloak
-    ports:
-      - "8090:8090"
     networks:
       - tour-network
     restart: unless-stopped
 
-  frontend:
-    image: robert912/tourpackage-frontend:latest
-    container_name: tour-frontend
+  backend2:
+    image: robert912/tourpackage-backend:latest
+    environment: *backend-env
     depends_on:
-      - backend
+      - mysql
       - keycloak
+    networks:
+      - tour-network
+    restart: unless-stopped
+
+  nginx-backend:
+    image: nginx:alpine
+    container_name: tour-backend-nginx
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./nginx/backend.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend1
+      - backend2
+    networks:
+      - tour-network
+    restart: unless-stopped
+
+  frontend1:
+    image: robert912/tourpackage-frontend:latest
+    depends_on:
+      - nginx-backend
+      - keycloak
+    networks:
+      - tour-network
+    restart: unless-stopped
+
+  frontend2:
+    image: robert912/tourpackage-frontend:latest
+    depends_on:
+      - nginx-backend
+      - keycloak
+    networks:
+      - tour-network
+    restart: unless-stopped
+
+  nginx-frontend:
+    image: nginx:alpine
+    container_name: tour-frontend-nginx
     ports:
       - "5173:80"
+    volumes:
+      - ./nginx/frontend.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend1
+      - frontend2
     networks:
       - tour-network
     restart: unless-stopped
