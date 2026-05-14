@@ -21,8 +21,10 @@ services:
       KC_DB: dev-file
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      KC_HOSTNAME_URL: http://159.112.150.20:9090
-      KC_HOSTNAME_ADMIN_URL: http://159.112.150.20:9090
+      KC_HOSTNAME: auth.trebolapp.cl
+      KC_HOSTNAME_STRICT: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: xforwarded
     volumes:
       - ./travel-realm-realm.json:/opt/keycloak/data/import/travel-realm-realm.json
       - ./../keycloak/travelapp:/opt/keycloak/themes/travelapp

@@ -14,7 +14,6 @@ Guía rápida para configurar el pipeline en Jenkins y desplegar el proyecto uti
 4. Asigna un nombre al proyecto.
 5. Pega el contenido del `Jenkinsfile`.
 
----
 
 ### 2. Configurar Maven en Jenkins
 
@@ -31,7 +30,6 @@ maven_3_8_1
 ```
 > ⚠️ El nombre debe coincidir exactamente con el definido en el `Jenkinsfile`.
 
----
 
 ### 3. Configurar Credenciales Docker Hub
 
@@ -77,7 +75,6 @@ VITE_BACKEND_SERVER=localhost
 docker compose up -d
 ```
 
----
 
 ### 🛑 Detener y eliminar contenedores
 
@@ -85,7 +82,6 @@ docker compose up -d
 docker compose down
 ```
 
----
 
 ### 📌 Flujo recomendado
 
@@ -101,4 +97,42 @@ docker ps
 
 # Validar aplicación
 curl http://localhost:8090
+```
+
+---
+
+## 📦 Nginx
+
+### 1. Configurar el bloque de servidor en Nginx
+#### Primero, crea un archivo de configuración para tu sitio.
+Crea el archivo:
+```bash
+sudo nano /etc/nginx/sites-available/travel
+```
+
+#### Pega el contenido de nginx.conf
+
+Habilita el sitio y reinicia Nginx:
+```bash
+sudo ln -s /etc/nginx/sites-available/travel /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+
+### 2. Instalar y configurar Certbot (SSL)
+#### Para tener el candadito verde (HTTPS), usaremos Let's Encrypt.
+Instala Certbot y el plugin de Nginx:
+```bash
+sudo apt update
+sudo apt install certbot python3-certbot-nginx
+```
+
+Obtén el certificado: Este comando leerá tu configuración de Nginx y te preguntará si quieres redirigir todo el tráfico a HTTPS (recomiendo que digas que sí opción 2).
+```bash
+sudo certbot --nginx -d travel.trebolapp.cl -d api-travel.trebolapp.cl -d auth.trebolapp.cl
+```
+Verifica la renovación automática: Certbot instala un "timer" que renueva los certificados antes de que venzan. Puedes probar que funciona con:
+```bash
+sudo certbot renew --dry-run
 ```
