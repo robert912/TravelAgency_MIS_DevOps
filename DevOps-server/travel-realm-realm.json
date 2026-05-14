@@ -899,18 +899,20 @@
       "clientId": "travel-frontend",
       "name": "",
       "description": "",
-      "rootUrl": "http://159.112.150.20:5173",
-      "adminUrl": "http://159.112.150.20:5173",
+      "rootUrl": "https://travel.trebolapp.cl",
+      "adminUrl": "http://localhost:5173",
       "baseUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://159.112.150.20:5173/*"
+        "https://travel.trebolapp.cl/*",
+        "http://localhost:5173/*"
       ],
       "webOrigins": [
-        "http://159.112.150.20:5173"
+        "https://travel.trebolapp.cl",
+        "http://localhost:5173"
       ],
       "notBefore": 0,
       "bearerOnly": false,
