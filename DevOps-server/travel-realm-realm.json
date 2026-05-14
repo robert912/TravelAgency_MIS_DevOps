@@ -899,18 +899,18 @@
       "clientId": "travel-frontend",
       "name": "",
       "description": "",
-      "rootUrl": "http://localhost:5173",
-      "adminUrl": "http://localhost:5173",
+      "rootUrl": "http://159.112.150.20:5173",
+      "adminUrl": "http://159.112.150.20:5173",
       "baseUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://localhost:5173/*"
+        "http://159.112.150.20:5173/*"
       ],
       "webOrigins": [
-        "http://localhost:5173"
+        "http://159.112.150.20:5173"
       ],
       "notBefore": 0,
       "bearerOnly": false,
@@ -924,12 +924,15 @@
       "protocol": "openid-connect",
       "attributes": {
         "realm_client": "false",
+        "logout.confirmation.enabled": "false",
         "oidc.ciba.grant.enabled": "false",
         "backchannel.logout.session.required": "true",
         "standard.token.exchange.enabled": "false",
         "oauth2.jwt.authorization.grant.enabled": "false",
         "post.logout.redirect.uris": "+",
+        "frontchannel.logout.session.required": "true",
         "oauth2.device.authorization.grant.enabled": "false",
+        "display.on.consent.screen": "false",
         "backchannel.logout.revoke.offline.tokens": "false",
         "dpop.bound.access.tokens": "false"
       },

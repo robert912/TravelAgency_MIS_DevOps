@@ -21,11 +21,11 @@ services:
       KC_DB: dev-file
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      KC_HOSTNAME_URL: http://localhost:9090
-      KC_HOSTNAME_ADMIN_URL: http://localhost:9090
+      KC_HOSTNAME_URL: http://159.112.150.20:9090
+      KC_HOSTNAME_ADMIN_URL: http://159.112.150.20:9090
     volumes:
-      - ./keycloak/travel-realm-realm.json:/opt/keycloak/data/import/travel-realm-realm.json
-      - ./keycloak/travelapp:/opt/keycloak/themes/travelapp
+      - ./travel-realm-realm.json:/opt/keycloak/data/import/travel-realm-realm.json
+      - ./../keycloak/travelapp:/opt/keycloak/themes/travelapp
     ports:
       - "9090:9090"
     networks:
@@ -65,7 +65,7 @@ services:
     ports:
       - "8090:8090"
     volumes:
-      - ./nginx/backend.conf:/etc/nginx/nginx.conf:ro
+      - ../nginx/backend.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - backend1
       - backend2
@@ -97,7 +97,7 @@ services:
     ports:
       - "5173:80"
     volumes:
-      - ./nginx/frontend.conf:/etc/nginx/nginx.conf:ro
+      - ../nginx/frontend.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - frontend1
       - frontend2

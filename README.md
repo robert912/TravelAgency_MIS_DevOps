@@ -56,6 +56,17 @@ Secret text
 | Secret | PasswordDeDockerHub |
 | ID | dhpswid |
 
+
+---
+
+## ▶️ Frontend env.
+
+### 🛠️ Debemos modificar el .env segun el entorno
+
+```text
+VITE_BACKEND_SERVER=localhost
+```
+
 ---
 
 ## 🐳 Docker Compose (DevOps)
