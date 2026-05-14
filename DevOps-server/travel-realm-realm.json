@@ -878,8 +878,8 @@
       "fullScopeAllowed": true,
       "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
-        "web-origins",
         "service_account",
+        "web-origins",
         "acr",
         "profile",
         "roles",
@@ -900,7 +900,7 @@
       "name": "",
       "description": "",
       "rootUrl": "https://travel.trebolapp.cl",
-      "adminUrl": "http://localhost:5173",
+      "adminUrl": "https://travel.trebolapp.cl",
       "baseUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
