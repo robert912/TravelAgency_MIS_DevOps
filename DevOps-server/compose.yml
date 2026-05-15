@@ -3,19 +3,19 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8.0
-    container_name: tour-mysql
+    container_name: travel-mysql
     environment:
       MYSQL_DATABASE: dbtravel
       MYSQL_ROOT_PASSWORD: 12345678
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
-      - tour-network
+      - travel-network
     restart: unless-stopped
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.6.1
-    container_name: tour-keycloak
+    container_name: travel-keycloak
     command: start-dev --import-realm --http-port=9090
     environment:
       KC_DB: dev-file
@@ -31,11 +31,11 @@ services:
     ports:
       - "9090:9090"
     networks:
-      - tour-network
+      - travel-network
     restart: unless-stopped
 
   backend1:
-    image: robert912/tourpackage-backend:latest
+    image: robert912/travelpackage-backend:latest
     environment: &backend-env
       DB_HOST: mysql
       DB_PORT: 3306
@@ -48,22 +48,22 @@ services:
       - mysql
       - keycloak
     networks:
-      - tour-network
+      - travel-network
     restart: unless-stopped
 
   backend2:
-    image: robert912/tourpackage-backend:latest
+    image: robert912/travelpackage-backend:latest
     environment: *backend-env
     depends_on:
       - mysql
       - keycloak
     networks:
-      - tour-network
+      - travel-network
     restart: unless-stopped
 
   nginx-backend:
     image: nginx:alpine
-    container_name: tour-backend-nginx
+    container_name: travel-backend-nginx
     ports:
       - "8090:8090"
     volumes:
@@ -72,30 +72,30 @@ services:
       - backend1
       - backend2
     networks:
-      - tour-network
+      - travel-network
     restart: unless-stopped
 
   frontend1:
-    image: robert912/tourpackage-frontend:latest
+    image: robert912/travelpackage-frontend:latest
     depends_on:
       - nginx-backend
       - keycloak
     networks:
-      - tour-network
+      - travel-network
     restart: unless-stopped
 
   frontend2:
-    image: robert912/tourpackage-frontend:latest
+    image: robert912/travelpackage-frontend:latest
     depends_on:
       - nginx-backend
       - keycloak
     networks:
-      - tour-network
+      - travel-network
     restart: unless-stopped
 
   nginx-frontend:
     image: nginx:alpine
-    container_name: tour-frontend-nginx
+    container_name: travel-frontend-nginx
     ports:
       - "5173:80"
     volumes:
@@ -104,12 +104,12 @@ services:
       - frontend1
       - frontend2
     networks:
-      - tour-network
+      - travel-network
     restart: unless-stopped
 
 volumes:
   mysql_data:
 
 networks:
-  tour-network:
+  travel-network:
     driver: bridge
