@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   keycloak:
-    image: quay.io/keycloak/keycloak:latest
+    image: quay.io/keycloak/keycloak:26.6.1
     container_name: tour-keycloak
     command: start-dev --import-realm --http-port=9090
     environment:

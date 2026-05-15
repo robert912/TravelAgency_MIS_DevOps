@@ -54,15 +54,20 @@ Secret text
 | Secret | PasswordDeDockerHub |
 | ID | dhpswid |
 
-
+> ⚠️ Al ejecutar el pipeline en Jenkins debes tener corriendo Docker Desktop para contruir las imagenes.
 ---
 
 ## ▶️ Frontend env.
 
 ### 🛠️ Debemos modificar el .env segun el entorno
 
-```text
-VITE_BACKEND_SERVER=localhost
+```bash
+VITE_API_URL=http://localhost:8090
+VITE_KEYCLOAK_URL=http://localhost:9090
+#VITE_API_URL=https://api-tour.trebolapp.cl
+#VITE_KEYCLOAK_URL=https://auth.trebolapp.cl
+VITE_KEYCLOAK_REALM=travel-realm
+VITE_KEYCLOAK_CLIENT_ID=travel-frontend
 ```
 
 ---
@@ -70,6 +75,8 @@ VITE_BACKEND_SERVER=localhost
 ## 🐳 Docker Compose (DevOps)
 
 ### ▶️ Levantar contenedores
+
+Debes tener correindo Docker Desktop
 
 ```bash
 docker compose up -d
