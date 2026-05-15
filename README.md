@@ -57,7 +57,7 @@ Secret text
 > ⚠️ Al ejecutar el pipeline en Jenkins debes tener corriendo Docker Desktop para contruir las imagenes.
 ---
 
-## ▶️ Frontend env.
+## ▶️ Modificar Frontend env.
 
 ### 🛠️ Debemos modificar el .env segun el entorno
 
@@ -68,6 +68,22 @@ VITE_KEYCLOAK_URL=http://localhost:9090
 #VITE_KEYCLOAK_URL=https://auth.trebolapp.cl
 VITE_KEYCLOAK_REALM=travel-realm
 VITE_KEYCLOAK_CLIENT_ID=travel-frontend
+```
+---
+
+## ▶️ Modificar Backend env.
+
+### 🛠️ Debemos modificar el *application.properties* segun el entorno
+
+```bash
+# Para localhost
+spring.security.oauth2.client.registration.keycloak.redirect-uri={baseUrl}/login/oauth2/code/keycloak
+spring.security.oauth2.client.provider.keycloak.issuer-uri=http://${KEYCLOAK_HOST}:9090/realms/travel-realm
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://${KEYCLOAK_HOST}:9090/realms/travel-realm/protocol/openid-connect/certs
+
+# Para Servidor
+spring.security.oauth2.client.provider.keycloak.issuer-uri=https://auth.trebolapp.cl/realms/travel-realm
+spring.security.oauth2.resourceserver.jwt.issuer-uri=https://auth.trebolapp.cl/realms/travel-realm
 ```
 
 ---

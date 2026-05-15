@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
 
   backend1:
-    image: robert912/travelpackage-backend:latest
+    image: robert912/travelagency-backend:latest
     environment: &backend-env
       DB_HOST: mysql
       DB_PORT: 3306
@@ -50,7 +50,7 @@ services:
     restart: unless-stopped
 
   backend2:
-    image: robert912/travelpackage-backend:latest
+    image: robert912/travelagency-backend:latest
     environment: *backend-env
     depends_on:
       - mysql
@@ -74,7 +74,7 @@ services:
     restart: unless-stopped
 
   frontend1:
-    image: robert912/travelpackage-frontend:latest
+    image: robert912/travelagency-frontend:latest
     depends_on:
       - nginx-backend
       - keycloak
@@ -83,7 +83,7 @@ services:
     restart: unless-stopped
 
   frontend2:
-    image: robert912/travelpackage-frontend:latest
+    image: robert912/travelagency-frontend:latest
     depends_on:
       - nginx-backend
       - keycloak
