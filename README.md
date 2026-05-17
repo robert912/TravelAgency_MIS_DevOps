@@ -17,7 +17,7 @@ Guía rápida para configurar el pipeline en Jenkins y desplegar el proyecto uti
 
 ### 2. Configurar Maven en Jenkins
 
-El error ocurre porque Jenkins no encuentra una instalación Maven con el nombre configurado en el `Jenkinsfile`.
+Instalación Maven con el nombre configurado en el `Jenkinsfile`.
 
 #### Ir a:
 ```text
@@ -62,12 +62,16 @@ Secret text
 ### 🛠️ Debemos modificar el .env segun el entorno
 
 ```bash
-VITE_API_URL=http://localhost:8090
-VITE_KEYCLOAK_URL=http://localhost:9090
-#VITE_API_URL=https://api-travel.trebolapp.cl
-#VITE_KEYCLOAK_URL=https://auth.trebolapp.cl
 VITE_KEYCLOAK_REALM=travel-realm
 VITE_KEYCLOAK_CLIENT_ID=travel-frontend
+
+# Para localhost
+VITE_API_URL=http://localhost:8090
+VITE_KEYCLOAK_URL=http://localhost:9090
+
+# Para Servidor
+VITE_API_URL=https://api-travel.trebolapp.cl
+VITE_KEYCLOAK_URL=https://auth.trebolapp.cl
 ```
 ---
 
