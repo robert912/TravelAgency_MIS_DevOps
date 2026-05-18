@@ -116,6 +116,9 @@ docker compose down
 # Detener entorno anterior
 docker compose down
 
+# Descarga las imágenes nuevas
+docker compose pull
+
 # Levantar entorno actualizado
 docker compose up -d
 
