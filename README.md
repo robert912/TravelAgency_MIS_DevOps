@@ -113,8 +113,10 @@ docker compose down
 ### 📌 Flujo recomendado
 
 ```bash
-# Detener entorno anterior
+# Detener y Eliminar entorno anterior
 docker compose down
+# Detener y Eliminar entorno anterior y base de datos
+docker compose down -v
 
 # Descarga las imágenes nuevas
 docker compose pull
@@ -124,6 +126,12 @@ docker compose up -d
 
 # Verificar contenedores
 docker ps
+
+# Detener contenedor
+docker compose stop backend1
+
+# Iniciar contenedor
+docker compose up backend1
 
 # Validar aplicación
 curl http://localhost:8090
